@@ -2,7 +2,7 @@
 title: Dev-Larks
 description: 'Jekyll-Uno - a minimal, responsive theme for Jekyll'
 url: 'http://dev-larks.github.io'
-baseurl: '/jekyll-uno'
+baseurl: '/dev-larks.github.io'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
 
