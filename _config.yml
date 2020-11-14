@@ -1,8 +1,8 @@
 # Site settings
 title: Dev-Larks
 description: 'All things PowerShell - My journey'
-# url: 'http://dev-larks.github.io'
-# baseurl: '/dev-larks.github.io'
+url: 'http://dev-larks.github.io'
+baseurl: '/dev-larks.github.io'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
 
