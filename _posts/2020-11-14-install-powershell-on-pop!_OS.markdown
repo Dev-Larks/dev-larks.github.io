@@ -10,7 +10,7 @@ As per the Microsoft documentation I performed the below steps to complete the i
 
 sudo apt-get update
 
-![sudo apt-get update](/dev-larks.github.io/images/Install pwsh71_000.png)
+![sudo apt-get update](/images/Install pwsh71_000.png)
 
 sudo apt-get install -y wget apt-transport-https, I already had the latest version so there was no install or upgrade required for the pre-requisite packages.
 
