@@ -62,7 +62,7 @@ Executing this command produced the below warning message:
 
 ```console
 [craig][~/.dotfiles/bash]-> stow -nvt ~ Mini
-WARNING! stowing MacMini would cause conflicts:
+WARNING! stowing Mini would cause conflicts:
   * existing target is neither a link nor a directory: .bashrc
 All operations aborted.
 ```
@@ -71,8 +71,8 @@ This is Ok, I had not created a dummy .bashrc file in the ~/.dotfiles/bash/Mini 
 
 ```console
 [craig][~/.dotfiles/bash]-> stow --adopt  -nvt ~ Mini
-MV: .bashrc -> .dotfiles/bash/MacMini/.bashrc
-LINK: .bashrc => .dotfiles/bash/MacMini/.bashrc
+MV: .bashrc -> .dotfiles/bash/Mini/.bashrc
+LINK: .bashrc => .dotfiles/bash/Mini/.bashrc
 WARNING: in simulation mode so not modifying filesystem.
 ```
 
