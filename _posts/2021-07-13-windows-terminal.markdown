@@ -58,7 +58,7 @@ I then added the following lines to the default section of the Terminal settings
 ```
 After closing and relaunching a new PowerShell terminal window I had a much nicer looking prompt and output. The Oh-My-Posh PowerShell module has alot of built in schemes which you can view in the terminal by running the Get-Posh themes cmdlet. At the time of writing this blogpost the theme that had originally inspired me to setup Windows terminal is now included by default "Theme: marcduiker".
 
-![Default Windows Terminal](/images/ICWT_002.png){: .centre-image}
+![Default Windows Terminal](/images/ICWT_002.PNG){: .centre-image}
 
 I'm a fan of the Nord colour scheme, and a quick search located a nord scheme from "Compiled Experience" which I added to the "schemes": section of my Windows Terminal settings.json file.
 I then set the default colour scheme to be Nord in the powershell.exe profile section in the settings.json file.
@@ -79,7 +79,7 @@ I created a custom prompt with elements that I liked from the marcduiker and ite
 
 I also tweaked the Windows Terminal nord colour scheme slightly to make the black and brightBlack colour easier to read changing the hex value from #4C566A to #D8DEE9.
 
-![Final Windows Terminal theme](/images/ICWT_003.png){: .centre-image}
+![Final Windows Terminal theme](/images/ICWT_003.PNG){: .centre-image}
 
 Below are links to the documentation and files I used to create my custom Windows Terminal:
 
