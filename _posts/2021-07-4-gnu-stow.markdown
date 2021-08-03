@@ -15,7 +15,7 @@ Stow is described on its man page as being "A symlink manager which takes distin
 In my home folder I created a .dotfiles directory to use as my Stow directory  and then created individual package directories for each of the application configuration files I wanted to manage via source control. This particular aspect makes the management of configuration files much easier as some programs create folders to store their configuration files in while others may place a single configuration file in a standard location such as the .config folder.
  For those configuration files that differed across the devices I created specific folders for these devices. An example of the folder structure is below.
 
-```console
+```powershell
 [craig][~]-> tree ~/.dotfiles
 |-- alacritty
 |-- bash
@@ -33,7 +33,7 @@ In my home folder I created a .dotfiles directory to use as my Stow directory  a
 
 The folder structure below each of the iniial application directories needs to replicate the folder structure of the default location that the application stores its configuration files this includes the actual configuration file names and formats that you want to create symlinks for using Stow. An example of the alacritty folder structure is shown below.
 
-```console
+```powershell
 [craig][~]-> tree -a .dotfiles/alacritty/
 .dotfiles/alacritty/
 `-- .config
@@ -47,7 +47,7 @@ When using Stow it is easier to move into the stow package directory in my case 
 
 To move the actual configuration files from the alacritty directory and replace them with symlinks to the files in .dotfiles the below command would be used.
 
-```console
+```powershell
 [craig][~/.dotfiles]-> stow -nvt ~ alacritty
 ```
 
@@ -60,7 +60,7 @@ When using Stow to symlink the files for a specific device it is essential to ch
 
 Executing this command produced the below warning message:
 
-```console
+```powershell
 [craig][~/.dotfiles/bash]-> stow -nvt ~ Mini
 WARNING! stowing Mini would cause conflicts:
   * existing target is neither a link nor a directory: .bashrc
@@ -69,7 +69,7 @@ All operations aborted.
 
 This is Ok, I had not created a dummy .bashrc file in the ~/.dotfiles/bash/Mini directory. Amending the stow command to include --adopt shows that the files will be linked as expected.
 
-```console
+```powershell
 [craig][~/.dotfiles/bash]-> stow --adopt  -nvt ~ Mini
 MV: .bashrc -> .dotfiles/bash/Mini/.bashrc
 LINK: .bashrc => .dotfiles/bash/Mini/.bashrc
@@ -78,7 +78,7 @@ WARNING: in simulation mode so not modifying filesystem.
 
 The command to create the symlink for the .bashrc file is below.
 
-```console
+```powershell
 [craig][~/.dotfiles/bash]-> stow --adopt -vt ~ Mini
 ```
 
