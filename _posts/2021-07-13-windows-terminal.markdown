@@ -42,7 +42,7 @@ Before I could successfully load a new PowerShell terminal I had to amend the Po
 
 Opening a new terminal instance was now successfully completed with no  PowerShell execution policy error messages but as the default terminal font had not been changed the Oh-My-Posh prompt was broken.
  
-![Initial state of Windows Terminal](/images/ICWT_001.png){: .centre-image}
+![Initial state of Windows Terminal](/images/ICWT_001.PNG){: .centre-image}
  
 To access the Windows Terminal settings.json file I used the Cntl + , keyboard shortcut and then clicked on the "Open JSON file" option in the bottom left corner.
 
