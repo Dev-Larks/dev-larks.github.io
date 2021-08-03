@@ -20,7 +20,7 @@ To increase the functionality of Vim I wanted to add a plugin manager so I follo
 
 This created the below folder structure in my user profile:
 
-![Initial state of Windows Terminal](/images/VPS_001.png){: .center-image}
+![Initial state of Windows Terminal](/images/VPS_001.png)
 
 ### Create vimrc
 To manage the configuration of Vim I needed to create a vimrc file. It took some reading of the initialisation section of both the VIM reference manual and the Vim-Plug help documentation to understand where this file should be located in Windows. My next challenge was then using the correct syntax in the vimrc file so that calling the :PlugInstall command within Vim to install the configured plugins worked. In the end a very simple configuration structure was enough to get me up and running, opening the Vim configuration file is as easy as opening Vim and then typing ':edit $MYVIMRC' and pressing the Enter key. 
