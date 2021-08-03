@@ -1,6 +1,6 @@
 ---
 title:  "Configuring Vim in Windows Terminal"
-date:   2021-08-1
+date:   2021-08-01
 categories: [powershell, vim, blog]
 tags: [Vim, PowerShell, Windows Terminal, blog, Nord Theme]
 ---
