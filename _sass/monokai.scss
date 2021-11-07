@@ -3,15 +3,15 @@ pre.highlight,
 .highlight .hll { background-color: #2E3440; }
 .highlight .c { color: #8FBCBB } /* Comment */
 .highlight .err { color: #ECEFF4; background-color: #2E3440 } /* Error */
-.highlight .k { color: #EBCB8B } /* Keyword */
+.highlight .k { color: #ECEFF4 } /* Keyword */
 .highlight .l { color: #ae81ff } /* Literal */
 .highlight .n { color: #EBCB8B } /* Name */
 .highlight .o { color: #ECEFF4 } /* Operator */
 .highlight .p { color: #f8f8f2 } /* Punctuation */
-.highlight .cm { color: #75715e } /* Comment.Multiline */
-.highlight .cp { color: #75715e } /* Comment.Preproc */
-.highlight .c1 { color: #75715e } /* Comment.Single */
-.highlight .cs { color: #75715e } /* Comment.Special */
+.highlight .cm { color: #ECEFF4 } /* Comment.Multiline */
+.highlight .cp { color: #ECEFF4 } /* Comment.Preproc */
+.highlight .c1 { color: #ECEFF4 } /* Comment.Single */
+.highlight .cs { color: #ECEFF4 } /* Comment.Special */
 .highlight .ge { font-style: italic } /* Generic.Emph */
 .highlight .gs { font-weight: bold } /* Generic.Strong */
 .highlight .kc { color: #88C0D0 } /* Keyword.Constant */
@@ -64,3 +64,6 @@ pre.highlight,
 .highlight .gu { color: #75715e; } /* Generic.Subheading & Diff Unified/Comment? */
 .highlight .gd { color: #f92672; } /* Generic.Deleted & Diff Deleted */
 .highlight .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */
+.highlight .gp { color: #a6e22e; }
+.highlight .go { color: #ECEFF4; }
+.highlight .highlight {color: #ECEFF4}
