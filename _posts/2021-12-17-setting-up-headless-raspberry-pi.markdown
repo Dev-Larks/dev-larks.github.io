@@ -68,3 +68,7 @@ CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                 
 c874505f50b9   hello-world   "/hello"   15 seconds ago   Exited (0) 14 seconds ago             practical_goldstine
 ```
 My next post will continue the configuration of the Raspberry Pi using Portainer to manually create a Pi-Hole Docker template and the final configuration of the headless server.
+
+Below are links to documentation that I used in the configuration process:
+- Raspberry Pi Security [Documentation](https://www.raspberrypi.com/documentation/computers/configuration.html#securing-your-raspberry-pi)
+- Docker Convenience script [Documentation](https://docs.docker.com/~venience-script)
