@@ -1,0 +1,70 @@
+---
+title:  "Setting up a Headless Raspberry Pi"
+date:   2021-12-17
+categories: [raspberrypi, blog]
+tags: [Raspberry Pi, Pi-Hole, Portainer, Docker, blog]
+---
+
+The aim of this project is to configure a headless Raspberry Pi 4 server that uses Docker and Portainer to host a Pi-Hole DNS sink. I used the 30-10-2021-raspios-bullseye-arm64-lite image file which I burnt to my SD card using the Raspberry Pi Imager. The build process was completed following the excellent documentation on the Raspberry Pi project website.
+
+### Initial Raspberry Pi Configuration
+
+At first boot I directly connected the Pi using a monitor and keyboard as the Raspberry Pi Imager did not support the advanced options to enable ssh when burning the image to my SD card. I signed in with the default username and password of 'pi' and 'raspberry' and ran the 'raspi-config' terminal interface to change the hostname, enable ssh and update the system. Following a restart I connected to the device using ssh and changed the default password for the 'pi' user and created a new account and added the account to the administrators and sudoers groups.
+
+```powershell
+pi@raspberrypi:~ $ sudo gpasswd -a admincl adm
+Adding user admincl to group adm
+pi@raspberrypi:~ $ sudo gpasswd -a admincl sudo
+Adding user admincl to group sudo
+pi@raspberrypi:~ $
+```
+
+To confirm that I could successfully sign in I opened a new shell and using ssh connected to the Raspberry Pi using my new user account. I confirmed that I could also run commands as sudo before locking the standard 'pi' account on the device.
+
+```powershell
+admincl@raspberrypi:~ $ sudo passwd -l pi
+[sudo] password for admincl:
+passwd: password expiry information changed.
+admincl@raspberrypi:~ $
+```
+
+I also edited the ssh configuration file to specify only my account can connect via ssh and restarted the sshd service to apply the configuration change.
+
+```powershell
+admincl@raspberrypi:~ $ sudo nano /etc/ssh/sshd_config
+AllowUsers admincl
+admincl@raspberrypi:~ $ sudo systemctl restart ssh
+```
+&nbsp;
+### Docker install
+After reading the documentation at the Docker site for a Debian based system I chose to install Docker on the Raspberry Pi using the convenience script. I created a Downloads folder and then moved to that directory and executed the script below.
+
+```powershell
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+At the completion of the install I verified the version of Docker that was installed using the docker --version command and also configured Docker to start on boot.
+```powershell
+admincl@raspberrypi:~/Downloads $ docker --version
+Docker version 20.10.12, build e91ed57
+admincl@raspberrypi:~/Downloads $ sudo systemctl enable docker.service
+admincl@raspberrypi:~/Downloads $ sudo systemctl enable containerd.service
+```
+In order to be able to run docker commands I had to be added to the docker group, I checked to make sure that the docker group existed and then added my user to the group. Once this was complete I closed the ssh session and reconnected and confirmed my user was now part of the docker group.
+
+```powershell
+admincl@raspberrypi:~ $ cat /etc/group | grep docker
+docker:x:995:
+admincl@raspberrypi:~ $ sudo usermod -aG docker admincl
+
+admincl@raspberrypi:~ $ id -a
+uid=1001(admincl) gid=1001(admincl) groups=1001(admincl),4(adm),27(sudo),995(docker)
+```
+To confirm my docker installation was running I ran the 'hello-world' container which was successully downloaded and executed. This was verified by running the docker ps -a command which returned the below output.
+
+```powershell
+admincl@raspberrypi:~ $ docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
+c874505f50b9   hello-world   "/hello"   15 seconds ago   Exited (0) 14 seconds ago             practical_goldstine
+```
+My next post will continue the configuration of the Raspberry Pi using Portainer to manually create a Pi-Hole Docker template and the final configuration of the headless server.
