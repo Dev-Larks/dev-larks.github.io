@@ -1,14 +1,13 @@
 ---
 title:  "Using GNU Stow to Manage my .dotfiles"
 date:   2021-07-4
+last_modified_at: 2022-1-7
 categories: [linux, blog]
 tags: [linux, blog, .dotfiles, arch linux, gnu stow]
 ---
 In this blog post I will outline the process that I use to manage my configuration files across two different devices.
 
-Using two different Linux devices both with different window managers I needed a solution that would easily allow me to manage the configuration files across both devices. While most of the configuration files are the same some files such as screen layout configuration, xinitrc etc vary due to the differing initialisation requirements of the window managers on each device. Of the two solutions I considered a Git bare respository or GNU Stow I chose to use Stow as I felt it provided the easiest solution to manage my requirements.
-
-
+Using two different Linux devices both with different window managers I needed a solution that would easily allow me to manage the configuration files across both devices. While most of the configuration files are the same some files such as screen layout configuration, xinitrc etc vary due to the differing initialisation requirements of the window managers on each device. There were two solutions I investigated to fulfil these requirements, a Git bare respository and GNU Stow. I chose to use Stow as I felt it provided the easiest solution to manage my requirements.
 
 Stow is described on its man page as being "A symlink manager which takes distinct sets of software/data located in separate directories in the filesystem, and makes them appear to be located in a single directory tree". This provides the opportunity to sync a single Github repository between the two devices.
 
@@ -31,7 +30,7 @@ In my home folder I created a .dotfiles directory to use as my Stow directory  a
 |-- |-- Mini
 ```
 
-The folder structure below each of the iniial application directories needs to replicate the folder structure of the default location that the application stores its configuration files this includes the actual configuration file names and formats that you want to create symlinks for using Stow. An example of the alacritty folder structure is shown below.
+The folder structure below each of the individual application directories needs to replicate the folder structure of the default location that the application stores its configuration files in this includes the actual configuration file names and formats that you want to create symlinks for using Stow. An example of the alacritty folder structure is shown below.
 
 ```powershell
 [craig][~]-> tree -a .dotfiles/alacritty/
@@ -41,18 +40,15 @@ The folder structure below each of the iniial application directories needs to r
         `-- alacritty.yml
 ```
 
-When using Stow to create the symlinks for the key configuration files that I wanted to manage I always used the -n option which provides a What-If function to show what Stow would have done based on the command inputs proved. I also used the -v flag to provide verbose output, which is not super detailed but useful to see what actions Stow has taken.
-
-When using Stow it is easier to move into the stow package directory in my case .dotfiles before running any commands. When using Stow to create the symlinks for the key configuration files that I wanted to manage I always use the -n option which provides a What-If function to show what Stow would have done based on the command inputs provided. I also use the -v flag to provide verbose output, which is not super detailed but useful to see what actions Stow has taken. The -t flag specifies the target directory and alacritty specifies the configuration files you want to symlink.
-
-To move the actual configuration files from the alacritty directory and replace them with symlinks to the files in .dotfiles the below command would be used.
+When using Stow it is preferable to move into the stow package directory in my case .dotfiles before running any commands. To move the actual configuration files from the alacritty directory and replace them with symlinks to the files in .dotfiles the below command would be used.
 
 ```powershell
 [craig][~/.dotfiles]-> stow -nvt ~ alacritty
 ```
 
+The -n option provides a What-If function to show what Stow would have done based on the command inputs provided. The -v flag displays verbose output, this is not super detailed but useful to see what actions Stow has taken. The -t flag specifies the target directory and alacritty specifies the configuration files you want to symlink.
 
-<h2>Device Specific .dotfile Management</h2>
+<h3>Device Specific .dotfile Management</h3>
 
 When using Stow to symlink the files for a specific device it is essential to change directory from the .dotfiles Stow folder into the application package folder as demonstrated below with my .bashrc file.
 
@@ -83,7 +79,7 @@ The command to create the symlink for the .bashrc file is below.
 ```
 
 
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 
 Using GNU stow is an easy to implement and effective method to manage .dotfiles in Linux across multiple devices and makes their management through source control a simple task. 
 I'm yet to be required to restore a configuration on one of my machines yet, but based on the research I conducted when exploring this solution it will be a straight forward process.
