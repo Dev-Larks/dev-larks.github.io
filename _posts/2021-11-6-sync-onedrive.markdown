@@ -1,8 +1,8 @@
 ---
 title:  "Sync OneDrive on Linux"
 date:   2021-11-6 21:49:23
-categories: [linux]
-tags: [linux, OneDrive]
+categories: [Linux]
+tags: [Linux, OneDrive]
 ---
 
 

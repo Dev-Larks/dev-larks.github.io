@@ -1,7 +1,7 @@
 ---
 title:  "Installing PowerShell 7.1 on Pop!_OS"
 date:   2020-11-14
-ategories: [Linux, PowerShell, Pop!_OS]
+categories: [Linux, PowerShell, Pop!_OS]
 tags: [Linux, PowerShell, Pop!_OS]
 ---
 I've installed Pop!_OS 20.04 LTS on an old Apple Mac Mini 3.1. Pop!_OS is based on Ubuntu and version 20.04 has just been officially supported by the just released PowerShell 7.1.

@@ -1,8 +1,8 @@
 ---
 title:  "vesa: Refusing to Run on UEFI"
 date:   2021-09-13 18:39:23
-categories: [linux]
-tags: [linux, nvidia]
+categories: [Linux]
+tags: [Linux, Nvidia]
 ---
 
 ### Problem

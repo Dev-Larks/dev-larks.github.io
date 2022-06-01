@@ -2,7 +2,7 @@
 title:  "My PowerShell Plaster Module Template"
 date:   2022-03-19 11:16:42
 categories: [PowerShell]
-tags: [PowerShell, Plaster,Module]
+tags: [PowerShell,Plaster,Module]
 ---
 
 Plaster is a PowerShell module scaffolding framework which allows you to create user defined PowerShell module layouts depending upon your needs. I spent yesterday revisiting the PowerShell Plaster template that I use when creating new PowerShell modules. I recently shared a module with some of my colleagues at work, one that is still under active development and subject to future change as code is refactored and new functions added. On Reddit I'd read a post where the idea of including a change log was mentioned to formally track these changes. In the past as the only active user of the tools I created I'd never considered this option, using my git commit messages to understand what I had changed.

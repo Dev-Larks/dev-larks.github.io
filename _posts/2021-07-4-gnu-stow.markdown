@@ -2,8 +2,8 @@
 title:  "Using GNU Stow to Manage my .dotfiles"
 date:   2021-07-4
 last_modified_at: 2022-1-7
-categories: [linux, blog]
-tags: [linux, blog, .dotfiles, arch linux, gnu stow]
+categories: [Linux, blog]
+tags: [Linux, blog, .dotfiles, Arch Linux, gnu stow]
 ---
 In this blog post I will outline the process that I use to manage my configuration files across two different devices.
 

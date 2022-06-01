@@ -1,7 +1,7 @@
 ---
 title:  "Install and Configure Windows Terminal"
 date:   2021-07-13
-categories: [powershell, blog]
+categories: [PowerShell, blog]
 tags: [PowerShell, Windows Terminal, blog, Nord Theme]
 ---
 
