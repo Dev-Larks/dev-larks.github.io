@@ -1,7 +1,7 @@
 ---
 title:  "Install and Configure Docker on Void Linux"
 date:   2022-08-19 10:29:42
-categories: [docker]
+categories: [Docker]
 tags: [Linux, Void, Docker]
 ---
 
