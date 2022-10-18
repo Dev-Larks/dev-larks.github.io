@@ -1,6 +1,7 @@
 ---
 title:  "Install and Configure Docker on Void Linux"
 date:   2022-08-19 10:29:42
+last_modified_at: 2022-10-18
 categories: [Docker]
 tags: [Linux, Void, Docker]
 ---
@@ -60,10 +61,10 @@ run: /var/service/docker: (pid 20513) 223s, normally down, want down; run: log: 
 
 The docker and containerd services state are managed via two shell scripts that I've created that use the sv up and sv down commands to start and stop them as needed. Both use a familiar PowerShell verb-noun syntax (start-docker & stop-docker). I've also created a get-docker script to get the current service state.
 
-The Docker install process on Void Linux doesn't create a group that you can add your user to. Due to this limitation all Docker commands need to be executed with 'sudo'. Below I verify I have a working Docker installation by pulling down the latest version of the Alpine Linux container from Dockerhub. I intend to use Alpine as the base for my website container.
+Initially I thought that the Docker install process on Void Linux didn't create a 'docker' group that you could add your user to so you can execute docker commands without sudo. I later realised that I had used the wrong command to check which groups were present, I've since added my user account to the docker group removing the need to use sudo to execute Docker commands. Below I verify I have a working Docker installation by pulling down the latest version of the Alpine Linux container from Dockerhub. I intend to use Alpine as the base for my website container.
 
 ```bash
-sudo docker run --rm -ti alpine:latest /bin/sh
+docker run --rm -ti alpine:latest /bin/sh
 Unable to find image 'alpine:latest' locally
 latest: Pulling from library/alpine
 213ec9aee27d: Pull complete
