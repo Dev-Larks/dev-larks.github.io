@@ -70,8 +70,6 @@ I'm really happy with how this function came together, it provides the ability t
 
 Below are some links to the documentation and other references I used when creating this function.
 
-Bas Bossink - PowerShell hashtable content not displayed in a function [StackOverflow](https://stackoverflow.com/questions/13353300/powershell-hashtable-content-not-displayed-within-a-function)
-
-Thomas Maurer - Powershell: check variable for null [Blogpost](https://www.thomasmaurer.ch/2010/07/powershell-check-variable-for-null/)
-
-Microsoft Docs - PowerShell Get-Credential [Documentation](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-credential?view=powershell-7.2)
+- Bas Bossink - PowerShell hashtable content not displayed in a function [StackOverflow](https://stackoverflow.com/questions/13353300/powershell-hashtable-content-not-displayed-within-a-function)
+- Thomas Maurer - Powershell: check variable for null [Blogpost](https://www.thomasmaurer.ch/2010/07/powershell-check-variable-for-null/)
+- Microsoft Docs - PowerShell Get-Credential [Documentation](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-credential?view=powershell-7.2)
