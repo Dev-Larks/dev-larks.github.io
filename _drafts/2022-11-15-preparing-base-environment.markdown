@@ -7,48 +7,65 @@ tags: [Vagrant]
 
 The post focuses on the recent experience that I've had updating Vagrant on both Arch and Void Linux in preparation for starting to work with Ansible to create a playbook to automate the creation of a Windows Server 2019 virtual machine as a domain controller.
 
-It had been a few months since I had last worked with Vagrant and I was running Vagrant 2.1.9 in both environments, with Vagrant 2.3.2 being the latest version of the application. Updating Vagrant is a straight forward process downloading the ve been using a function to retrieve BitLocker keys from Active Directory which up until recently I believed to work without issue. The function was designed to find all BitLocker keys for a given device and then sort them by the whenCreated property and then return the newest record.
+It had been a few months since I had last worked with Vagrant and I was running Vagrant 2.1.9 on both devices, Vagrant 2.3.2 being the latest version of the application. Updating Vagrant is a straight forward process downloading the binary and then extracting and moving it to the /usr/bin/ directory and then executing vagrant --version to confirm the new version has been detected. This did return the expected version information checking to confirm the names of the Vagrant plugins that I have installed however returned an error. At a minimum the vagrant-libvirt plugin must be installed as this is the virtualisation management platform that I use.
 
 ```powershell
-$obj = Get-ADObject -Filter 'objectClass -eq "msFVE-RecoveryInformation"' -SearchBase $computer -Properties whenCreated, msFVE-RecoveryPassword -Credential (Get-Credential) | Sort-Object whenCreated -Descending | Select-Object whenCreated, msFVE-RecoveryPassword
+[craig][~]-> vagrant --version
+Vagrant 2.3.2
+[craig][~]-> vagrant plugin list
+Vagrant failed to initialize at a very early stage:
 
-            [Ordered]@{
-                ComputerName  = $computerName
-                EncryptedDate = $obj.whenCreated[0]
-                BitLockerKey  = $obj.{msFVE-RecoveryPassword}[0]
-            }
+The plugins failed to initialize correctly. This may be due to manual
+modifications made within the Vagrant home directory. Vagrant can
+attempt to automatically correct this issue by running:
+
+  vagrant plugin repair
+
+If Vagrant was recently updated, this error may be due to incompatible
+versions of dependencies. To fix this problem please remove and re-install
+all plugins. Vagrant can attempt to do this automatically by running:
+
+  vagrant plugin expunge --reinstall
+
+Or you may want to try updating the installed plugins to their latest
+versions:
+
+  vagrant plugin update
+
+Error message given during initialization: Unable to resolve dependency: user requested 'pkg-config (= 1.4.7)'
 ```
 
-This had always returned the expected results until I came across a device that only had one key present, instead of the whole key being returned only the first number of the key was returned. Initially I discounted this issue as an anomally with that particular device when the issue was again encountered I grew suspicious that there was an issue that needed investigation.
+Based on the above recommendations I tried all options starting with update, then repair and finally expunge. All failed to successfully resolve the issue with various Ruby gem dependencies being flagged as being unable to be resolved upon application launch. This sent me off down quite a rabbit hole trying to get the various dependencies that were missing installed. I did learn some useful ruby gem commands to manage the installation and removal of specific gem versions these commands all required me to use sudo to execute which on later reflection should of been an indicator that I was working to resolve the errors that Vagrant was reporting in a location that Vagrant didn't use /usr/bin/ruby. Vagrant stores its gems separately in the /home/user/.vagrant/ directory which as it is owned by my user sudo would not be required.
 
-I quickly realised that the issue was that when only one BitLocker key present as there was only one item in the array returned by the query. The way the output to the console was structured only the first number of the key would be returned. Having determined the root cause of the issue, I started to try and logically determine how I could test if there was only one key returned by the initial Get-ADObject enquiry.
+Digging around in the .vagrant.d directory I noted that there were two sub folders in the .vagrant.d/gems directory one named 3.0.3 and a second 2.7.5, both had similar contents and both had the vagrant-libvirt-0.7.0 gemfile which at that time was the dependency Vagrant was reporting could not be resolved. I decided it was best to clean up the .vagrant.d/ directory and let Vagrant recreate the working directory when I next executed a vagrant command.
 
 ```powershell
-$obj.GetType()
-
-IsPublic IsSerial Name      BaseType
--------- -------- ----      --------
-True     False    ADObject  Microsoft.ActiveDirectory.Management.ADEntity
+[craig][~]-> rm -rf .vagrant.d/
+[craig][~]-> vagrant plugin install vagrant-mutate
+Installing the 'vagrant-mutate' plugin. This can take a few minutes...
+Fetching vagrant-mutate-1.2.0.gem
+Installed the plugin 'vagrant-mutate (1.2.0)'!
+[craig][~]-> vagrant plugin install vagrant-libvirt
+Installing the 'vagrant-libvirt' plugin. This can take a few minutes...
+Fetching xml-simple-1.1.9.gem
+Fetching nokogiri-1.13.9-x86_64-linux.gem
+Fetching ruby-libvirt-0.8.0.gem
+Building native extensions. This could take a while...
+Fetching formatador-1.1.0.gem
+Fetching fog-core-2.3.0.gem
+Fetching fog-xml-0.1.4.gem
+Fetching fog-json-1.2.0.gem
+Fetching fog-libvirt-0.9.0.gem
+Fetching diffy-3.4.2.gem
+Fetching vagrant-libvirt-0.10.8.gem
+Installed the plugin 'vagrant-libvirt (0.10.8)'! 
 ```
-This object type did not have any inbuilt methods that could be leveraged. With this option eliminated I then turned to how my query was structured and what options I had to control the output of the complete BitLocker key.
-
-Reading the help documentation for the Select-Object cmdlet I discovered that there was a -First parameter that "Specifies the number of objects to select from the beginning of an array of input objects". I changed the query to specifically select the first item in the array once it had been sorted by dateCreated. Now in the hash table that is returning the values there is no need to manually specify which item in the array should be returned. The amended query is below.
- 
-```powershell
-$obj = Get-ADObject -Filter 'objectClass -eq "msFVE-RecoveryInformation"' -SearchBase $computer -Properties whenCreated, msFVE-RecoveryPassword -Credential (Get-Credential) | Sort-Object whenCreated -Descending | Select-Object -First 1
-
-[Ordered]@{
-               ComputerName  = $computerName
-               EncryptedDate = $obj.whenCreated
-               BitLockerKey  = $obj.'msFVE-RecoveryPassword'
-            }
-```
-
-This change has now resolved the issue and the correct full BitLocker Recovery key is returned regardless of the number of keys present in Active Directory. I've since encountered another issue where from some office locations the BitLockerKey is not returned at all. I believe that this is most likely due to the domain controller that I'm authenticated to in those locations not having the BitLocker Recovery information replicated to it. I intend to test this theory by manually specifying the domain controller to query as the Get-ADObject cmdlet has a -server parameter for the BitLocker recovery information to confirm if that resolves the issue.
 
 ## Conclusion
-This proved to be a reasonably straight forward issue to resolve once I discovered the -First parameter option for Select-Object. The initial option I was going to use to address the issue was using an 'if' statement to check the length of the $obj.'msFVE-RecoveryPassword' property and then determine what action to take, but ultimately the solution I ended up using was far less complex and much easier to implement.
+This experience has taught me that the next time I update Vagrant best practice will be to rename the current .vagrant.d directory and reinstall the plugins that I need and then copy the box files and other configuration files from the old directory across to the current directory. 
 
 Below are some links to the documentation and other references I used when resolving this issue.
 
-Vagrant: [Download Vagrant](https://developer.hashicorp.com/vagrant/downloads)
+- Vagrant - [Download Vagrant](https://developer.hashicorp.com/vagrant/downloads)
+- Vagrant Dependencies - [Ruby Version](https://github.com/hashicorp/vagrant/blob/main/vagrant.gemspec)
+- stackoverflow - [Uninstall old versions of Ruby gems](https://stackoverflow.com/questions/5902488/uninstall-old-versions-of-ruby-gems)
