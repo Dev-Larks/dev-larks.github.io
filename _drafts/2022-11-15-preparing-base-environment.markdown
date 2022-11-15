@@ -68,4 +68,4 @@ Below are some links to the documentation and other references I used when resol
 
 - Vagrant - [Download Vagrant](https://developer.hashicorp.com/vagrant/downloads)
 - Vagrant Dependencies - [Ruby Version](https://github.com/hashicorp/vagrant/blob/main/vagrant.gemspec)
-- stackoverflow - [Uninstall old versions of Ruby gems](https://stackoverflow.com/questions/5902488/uninstall-old-versions-of-ruby-gems)
+- Uninstall old versions of Ruby gems - [stackoverflow](https://stackoverflow.com/questions/5902488/uninstall-old-versions-of-ruby-gems)
