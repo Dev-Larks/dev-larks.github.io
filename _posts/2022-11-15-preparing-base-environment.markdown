@@ -9,7 +9,7 @@ The post focuses on the recent experience that I've had updating Vagrant on both
 
 It had been a few months since I had last worked with Vagrant and I was running Vagrant 2.1.9 on both devices, Vagrant 2.3.2 being the latest version of the application. Updating Vagrant is a straight forward process downloading the binary and then extracting and moving it to the /usr/bin/ directory and then executing vagrant --version to confirm the new version has been detected. This did return the expected version information checking to confirm the names of the Vagrant plugins that I have installed however returned an error. At a minimum the vagrant-libvirt plugin must be installed as this is the virtualisation management platform that I use.
 
-```powershell
+```bash
 [craig][~]-> vagrant --version
 Vagrant 2.3.2
 [craig][~]-> vagrant plugin list
@@ -34,7 +34,7 @@ Based on the above recommendations I tried all options starting with update, the
 
 Digging around in the .vagrant.d directory I noted that there were two sub folders in the .vagrant.d/gems directory one named 3.0.3 and a second 2.6.6, both had similar contents and both had the vagrant-libvirt-0.7.0 gemfile which at that time was the dependency Vagrant was reporting could not be resolved. I decided it was best to clean up the .vagrant.d/ directory and let Vagrant recreate the working directory when I next executed a vagrant command.
 
-```powershell
+```bash
 [craig][~]-> rm -rf .vagrant.d/
 [craig][~]-> vagrant plugin install vagrant-mutate
 Installing the 'vagrant-mutate' plugin. This can take a few minutes...
@@ -57,13 +57,13 @@ Installed the plugin 'vagrant-libvirt (0.10.8)'!
 ```
 With Vagrant now updated and the necessary plugins installed I changed to a previous directory with a Vagrantfile and run the 'vagrant up' command. This then resulted in an error that was vague in its cause.
 
-```bash
+```
 Bringing machine 'default' up with 'libvirt' provider...
 Name 'playbooks_default' of domain about to create is already taken. Please try to run 'vagrant up' command again.
 ```
 
 Running 'vagrant global-status returned the following
-```bash
+```
 id      name    provider    state   directory
 --------------------------------------------------------
 There are no active Vagrant environments on this computer! Or, you haven't destroyed and recreated Vagrant environments that were started with an older version of Vagrant.
