@@ -65,7 +65,7 @@ SSH password:
 
  
 ## Conclusion
-It has been almost a year since I'd last looked at this project and it took some time to refamiliarise myself with the syntax for Vagrant and Ansible. Having moved into a SysOps role in recent months and having greater opportunity to use PowerShell in everyday work tasks I'm keen to continue to invest time to learn these two technologies. To this end I intend to work through the two resources that I have 
+It has been almost a year since I'd last looked at this project and it took some time to refamiliarise myself with the syntax for Vagrant and Ansible. Having moved into a SysOps role in recent months and having greater opportunity to use PowerShell in everyday work tasks I'm keen to continue to invest time to learn these two technologies. To this end I intend to work through the two resources that I have from Josh Duffney - Become Ansible and Jeff Geerling - Ansible for DevOps and apply what I learn to automate the setup of my lab environment.
 
 Below are some links to the documentation and other references I used when resolving this issue.
 
