@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.2"
+  templateType="Item" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>MyCustomBlogPostPlasterTemplate</name>
+    <id>abd8e9d3-e3c6-4714-adee-a74638e29a14</id>
+    <version>0.0.1</version>
+    <title>DL Custom Plaster Template</title>
+    <description></description>
+    <author>Craig Larkin</author>
+    <tags></tags>
+  </metadata>
+  <parameters>
+    <parameter name="Title" type="text" prompt="Title of blog post" />
+    <parameter name="BlogFileName" type="text" prompt="Blog File Name" default="$(${PLASTER_PARAM_Title}.replace(' ','-').tolower())" />
+    <parameter name="Tags" type="text" prompt="Tags" default=""/>
+    <parameter name="Date" type="text" prompt="Publish Date" default="$(get-date -Format yyyy-MM-dd)" />
+  </parameters>
+  <content>
+    <message>Creating blank post in /drafts folder</message>
+    <file source='' destination='_drafts'/>
+    <templateFile source="BlogPost.md"
+                  destination='_drafts\${PLASTER_PARAM_Date}-${PLASTER_PARAM_BlogFileName}.md'/>
+    
+  </content>
+</plasterManifest>
