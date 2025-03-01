@@ -1,6 +1,7 @@
 ---
 title:  "Pt 2: Configuring Windows Server with Ansible - Preparing Vagrant and Installing Ansible"
 date:   2023-11-13 21:37:56
+last_modified_at:  2024-05-05 21:31:16
 categories: [Vagrant, Ansible]
 tags: [Vagrant, Ansible]
 ---
@@ -44,16 +45,19 @@ ansible [core 2.15.0]
   libyaml = True
   ```
 
-Keen to try a simple ping test to confirm I could communicate to my VM using Ansible I created a hosts.ini file and ran the following command: ansible -i hosts.ini lab -m ping -u vagrant --ask-pass
+Keen to try a simple ping test to confirm I could communicate to my VM using Ansible I created a hosts.ini file with the below content:
 ```powershell
-[craig][~/dev/Ansible/Windows_Lab]-> ansible -i hosts.ini lab -m ping -u vagrant --ask-pass
-SSH password:
-192.168.121.119 | FAILED! => {
-    "msg": "to use the 'ssh' connection type with passwords or pkcs11_provider, you must install the sshpass program"
-}
-```
+[lab]
+192.168.121.108
 
-Installing the sshpass program did not immediately provide the successful connection that I was looking for. Some further reading of the Ansible documentation and some experimentation provided the ability to successfully connect using Ansible and ping my lab server. I had to change the module (-m) that I was requesting to use to win_ping, and add an extra parameter -e 'ansible_shell_type=cmd'. The amended command looks like this:
+[all:vars]
+ansible_connection=ssh
+ansible_user=vagrant
+
+[lab:vars]
+ansible_shell_type=cmd
+```
+I ran the following command and received the expected reply as shown below.
 ```powershell
 [craig][~/dev/Ansible/Windows_Lab]-> ansible -i hosts.ini lab -m win_ping -e 'ansible_shell_type=cmd' -u vagrant --ask-pass
 SSH password:
@@ -62,7 +66,7 @@ SSH password:
     "ping": "pong"
 }
 ```
-
+With connectivity via Ansible now confirmed I also now implemented a vagrant-libvirt network xml file which I blogged about back in March 2022. With that in place I can define the MAC address of the VM in the Vagrantfile and know what IP address my virtual machine will be assigned. This reduces the overhead of constantly updating the Ansible hosts.ini file with a new IP address each time I execute the vagrant up command.
  
 ## Conclusion
 It has been almost a year since I'd last looked at this project and it took some time to refamiliarise myself with the syntax for Vagrant and Ansible. Having moved into a SysOps role in recent months and having greater opportunity to use PowerShell in everyday work tasks I'm keen to continue to invest time to learn these two technologies. To this end I intend to work through the two resources that I have from Josh Duffney - Become Ansible and Jeff Geerling - Ansible for DevOps and apply what I learn to automate the setup of my lab environment.
