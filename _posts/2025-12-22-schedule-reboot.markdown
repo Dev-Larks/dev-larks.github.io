@@ -41,11 +41,10 @@ shutdown -r -t $difference
 This is super simple and will remove the need for me to manually initiate server reboots out of hours and also provides the functionality to easily change reboot time by changing the $then value to the required value.
 
 
-****Thanks for Reading,*
-**Craig*
+*Thanks for Reading,*
+*Craig*
 
 ### Sources
 Below are the sources that I referenced when developing this tool.
-
-- saltface - Restart a computer at a given time with PowerShell [StackExchange](https://superuser.com/questions/847571/restart-a-computer-at-a-given-time-with-powershell 
-- archdeacon - Adding hours minutes and seconds to a time value [PowerShell.org](ttps://forums.powershell.org/t/adding-hours-minutes-and-seconds-to-a-time-value/9630)
+- saltface - Restart a computer at a given time with PowerShell [StackExchange](https://superuser.com/questions/847571/restart-a-computer-at-a-given-time-with-powershell) 
+- archdeacon - Adding hours minutes and seconds to a time value [PowerShell.org](https://forums.powershell.org/t/adding-hours-minutes-and-seconds-to-a-time-value/9630)
