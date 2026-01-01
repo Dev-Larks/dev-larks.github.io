@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Wofi App Launcher"
+date: 2025-12-22
+readtime: true
+tags: [linux] [CachyOS]
+---
+
+<!--more-->
+After several years of running Void Linux without issues I've switched to using CachyOS and Arch based distribution. This came about after I tried unsuccessfully to rebuilt my existing Void install last mmonth, the primary driver for this was that following an upgrade to Qt6 my password manager would no longer run. I was unable to manually install an older version of the password manager due to dependency issues that I was not able to resolve. The key issue was the inability to get my terminal of choice Alacritty to successfully run on a base install of Void and Hyprland. I spent many hours trying to determine the cause of the errors but was unable to find a solution. Reluctantly I decided to move to CachyOS this was primarily as I during the course of last year I had started to play some games on Linux so the ability to install Steam and have a potentially more gaming oriented distribution was attractive. On Void I'd not been able to get Steam to run natively due to some sound issues and had installed a Flatpak version of Steam to get around this.
+
+The CachyOS install was very straight forward I selected refind as the boot manager, btrfs as the file system, and Hyprland as my desktop environment (window manager). Hyprland is the one window manager with the exception of Spectrwm that works out of the box in a manner that makes sense to me. By default CachyOS uses Wofi as its application launcher and the default configuration is very basic, I have always liked the Nord colour scheme and wanted to configure Wofi using this colour palette. I found a rofi colour scheme that I liked an set about implementing it in wofi. 
+
+![rofi example](/images/rofi.png)
+
+I reviewed the wofi man page in particular the configuration options which are managed by a config file and css stylesheet. Some further searching enabled me to find a Dracula theme css stylesheet that I elected to use as a template to then restyle using the colours from the Nord Palette. I struggled to find good documentation on how the various components of the launcher were managed via css so the process involved a lot of trial and error. Some css values didn't appear to be supported by the various elements as I was not able to successfully apply a radius to the wofi search field and there was a small 1 pixel box that was still visible when the selected entry had the radius applied to it.
+
+![Nord wofi](/images/wofi.png)
+
+This process took several hours and while I didn't exactly match the rofi source image I was happy with the end result, I may add some transparency to the launcher background as a further tweak.
+
+
+****Thanks for Reading,*
+**Craig*
+
+### Sources
+Below are the sources that I referenced when developing this tool.
+
+- newmanls - Rofi themes collection [Github] (https://github.com/newmanls/rofi-themes-collection)
+- Dracula theme - [Wofi Dracula theme] (https://draculatheme.com/wofi)
+- Nord Theme - [Nord theme] (https://www.nordtheme.com/docs/colors-and-palettes)
+- Cloud Ninja - [Wofi styling] (https://cloudninja.pw/docs/wofi.html)
+- scoopta - Wofi source [sourcehut] (https://hg.sr.ht/~scoopta/wofi)
