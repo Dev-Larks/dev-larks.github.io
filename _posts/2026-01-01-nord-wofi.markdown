@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Wofi App Launcher"
-date: 2025-12-22
+date: 2026-01-01
 readtime: true
-tags: [linux] [CachyOS]
+tags: [linux,CachyOS]
 ---
 
 <!--more-->
