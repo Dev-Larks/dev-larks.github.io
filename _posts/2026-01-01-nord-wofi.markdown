@@ -26,8 +26,8 @@ This process took several hours and while I didn't exactly match the rofi source
 ### Sources
 Below are the sources that I referenced when developing this tool.
 
-- newmanls - Rofi themes collection [Github] (https://github.com/newmanls/rofi-themes-collection)
-- Dracula theme - [Wofi Dracula theme] (https://draculatheme.com/wofi)
-- Nord Theme - [Nord theme] (https://www.nordtheme.com/docs/colors-and-palettes)
-- Cloud Ninja - [Wofi styling] (https://cloudninja.pw/docs/wofi.html)
-- scoopta - Wofi source [sourcehut] (https://hg.sr.ht/~scoopta/wofi)
+- newmanls - Rofi themes collection [Github](https://github.com/newmanls/rofi-themes-collection)
+- Dracula theme - [Wofi Dracula theme](https://draculatheme.com/wofi)
+- Nord Theme - [Nord theme](https://www.nordtheme.com/docs/colors-and-palettes)
+- Cloud Ninja - [Wofi styling](https://cloudninja.pw/docs/wofi.html)
+- scoopta - Wofi source [sourcehut](https://hg.sr.ht/~scoopta/wofi)
