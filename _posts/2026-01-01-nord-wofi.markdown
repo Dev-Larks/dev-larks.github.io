@@ -20,8 +20,8 @@ I reviewed the wofi man page in particular the configuration options which are m
 This process took several hours and while I didn't exactly match the rofi source image I was happy with the end result, I may add some transparency to the launcher background as a further tweak.
 
 
-****Thanks for Reading,*
-**Craig*
+*Thanks for Reading,*
+*Craig*
 
 ### Sources
 Below are the sources that I referenced when developing this tool.
